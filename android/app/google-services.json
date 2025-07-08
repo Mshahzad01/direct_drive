@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1064303315575",
+    "project_id": "direct-drive-471ed",
+    "storage_bucket": "direct-drive-471ed.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1064303315575:android:498a1198bbc42f21d95472",
+        "android_client_info": {
+          "package_name": "com.example.direct_drive"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLQTVf3O0YJKht_Uwfd7cdVSVmHHAM9T8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
