@@ -88,7 +88,7 @@ class _AnimationscreeState extends State<Animationscree>
     final user = FirebaseAuth.instance.currentUser;
 
     if (user != null) {
-      Navigator.pushReplacementNamed(context, RouteName.home);
+      Navigator.pushReplacementNamed(context, RouteName.appbottm);
     } else {
       Navigator.pushReplacementNamed(context, RouteName.splash);
     }

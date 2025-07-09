@@ -13,33 +13,28 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
-
-  final AuthRepository _repository = AuthRepository(AuthService());
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<AuthCubit>(
-          create: (_) => AuthCubit(_repository), 
-        ),
+        BlocProvider<AuthCubit>(create: (_) => AuthCubit()),
 
-        BlocProvider<UserCubit>( create:(_) => UserCubit(_repository)..loadUserData()),
+        BlocProvider<UserCubit>(
+          create: (_) => UserCubit()..loadUserData(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         onGenerateRoute: AppRoute.onGenerateRoute,
         theme: MyThemeData.themeData,
         initialRoute: RouteName.animation,
-   
       ),
     );
   }

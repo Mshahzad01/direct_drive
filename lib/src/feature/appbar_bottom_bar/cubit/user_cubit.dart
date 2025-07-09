@@ -4,15 +4,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'user_state.dart';
 
 class UserCubit extends Cubit<UserState> {
-  final AuthRepository repository;
+  UserCubit() : super(UserInitial()) {
+    repository = AuthRepository();
+  }
 
-  UserCubit(this.repository) : super(UserInitial());
+  late AuthRepository repository;
 
   Future<void> loadUserData() async {
     emit(UserLoading());
 
     try {
-      final user = await repository.getUserById(repository.currentUser?.uid ?? '');
+      final user = await repository.getUserById(
+        repository.currentUser?.uid ?? '',
+      );
       if (user != null) {
         emit(UserLoaded(user));
       } else {

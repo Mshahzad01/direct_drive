@@ -26,7 +26,7 @@ class _WorldMapWidgetState extends State<WorldMapWidget> {
   }
 
   Future<void> _loadMapStyle() async {
-    _mapStyle = await rootBundle.loadString('assets/map_style_dark.json');
+    _mapStyle = await rootBundle.loadString('assets/assets/map_style.json');
   }
 
   Future<void> _goToCurrentLocation() async {
@@ -91,17 +91,17 @@ class _WorldMapWidgetState extends State<WorldMapWidget> {
         ),
 
 
-        Positioned(
-          bottom: 100,
-          right: 20,
-          child: GestureDetector(
-            onTap: _goToCurrentLocation,
-            child: CircleAvatar(
-              backgroundColor: Colors.black87,
-              child: Icon(Icons.my_location, color: Colors.white),
-            ),
-          ),
-        ),
+        // Positioned(
+        //   bottom: 100,
+        //   right: 20,
+        //   child: GestureDetector(
+        //     onTap: _goToCurrentLocation,
+        //     child: CircleAvatar(
+        //       backgroundColor: Colors.black87,
+        //       child: Icon(Icons.my_location, color: Colors.white),
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }

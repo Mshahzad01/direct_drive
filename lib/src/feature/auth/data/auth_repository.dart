@@ -2,9 +2,11 @@ import '../model/user_model.dart';
 import 'auth_service.dart';
 
 class AuthRepository {
-  final AuthService _service;
-  AuthRepository(this._service);
+  AuthRepository() {
+    _service = AuthService();
+  }
 
+  late AuthService _service;
   Future<UserModel?> signUpWithEmail({
     required String email,
     required String password,
@@ -34,20 +36,17 @@ class AuthRepository {
     return _service.signOut();
   }
 
-
-
-Future<void>  restpassword(String email){
-
-  return _service.restpassword(email);
-}
+  Future<void> restpassword(String email) {
+    return _service.restpassword(email);
+  }
 
   Future<UserModel?> getUserById(String uid) {
-  return _service.getUserData(uid);
-}
+    return _service.getUserData(uid);
+  }
 
   UserModel? get currentUser {
     final user = _service.currentUser;
     if (user == null) return null;
     return UserModel(uid: user.uid, email: user.email ?? '');
   }
-} 
+}

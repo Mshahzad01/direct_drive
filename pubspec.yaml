@@ -78,6 +78,7 @@ flutter:
     - assets/menu_svg/
     - assets/nav_bar/
     - assets/svg/
+    - assets/assets/map_style.json
     
 
 

@@ -1,4 +1,3 @@
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../data/auth_repository.dart';
 import 'auth_state.dart';
@@ -7,14 +6,17 @@ import 'dart:io';
 import '../model/registration_data.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  final AuthRepository repository;
   RegistrationData _registrationData = RegistrationData(
     email: '',
     firstName: '',
     lastName: '',
     password: '',
   );
-  AuthCubit(this.repository) : super(AuthInitial());
+  AuthCubit() : super(AuthInitial()) {
+    _repo = AuthRepository();
+  }
+
+  late AuthRepository _repo;
 
   void updateEmail(String email) {
     _registrationData = _registrationData.copyWith(email: email);
@@ -35,7 +37,7 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthLoading());
 
     try {
-      final user = await repository.signUpWithEmail(
+      final user = await _repo.signUpWithEmail(
         email: _registrationData.email,
         password: _registrationData.password,
         firstName: _registrationData.firstName,
@@ -61,7 +63,7 @@ class AuthCubit extends Cubit<AuthState> {
   }) async {
     emit(AuthLoading());
     try {
-      final user = await repository.signInWithEmail(
+      final user = await _repo.signInWithEmail(
         email: email,
         password: password,
       );
@@ -82,7 +84,7 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> signInWithGoogle() async {
     emit(AuthLoading());
     try {
-      final user = await repository.signInWithGoogle();
+      final user = await _repo.signInWithGoogle();
       if (user != null) {
         emit(AuthSuccess(user));
       } else {
@@ -98,7 +100,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> signOut() async {
-    await repository.signOut();
+    await _repo.signOut();
     emit(AuthInitial());
   }
 
@@ -106,23 +108,17 @@ class AuthCubit extends Cubit<AuthState> {
     emit(AuthLoading());
 
     try {
-      await repository.restpassword(email);
+      await _repo.restpassword(email);
 
       emit(AuthInitial());
     } catch (e) {
       emit(AuthFailure("Rest link Falid: ${e.toString()}"));
     }
 
-    await repository.restpassword(email);
+    await _repo.restpassword(email);
   }
 
-
-
-// load fetch users data 
-
-
-
-
+  // load fetch users data
 
   String _firebaseErrorMessage(FirebaseAuthException e) {
     switch (e.code) {
